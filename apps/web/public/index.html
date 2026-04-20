@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI 医疗 MVP 控制台</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>AI 医疗产品操作系统（MVP）</h1>
+      <p>统一主链路：进入 → 识别 → 判断 → 建议 → 执行 → 回流 → 再管理</p>
+    </header>
+
+    <main class="layout">
+      <section class="card">
+        <h2>入口 / 评估参数</h2>
+        <form id="flow-form">
+          <label>症状（逗号分隔）
+            <input name="symptoms" placeholder="cough, chest_pain" />
+          </label>
+          <label>用户原始描述
+            <textarea name="rawUserInput" rows="2" placeholder="例如：胸痛伴呼吸困难"></textarea>
+          </label>
+          <label>结构化：是否发热
+            <select name="hasFever">
+              <option value="unknown">未知</option>
+              <option value="true">是</option>
+              <option value="false">否</option>
+            </select>
+          </label>
+          <label>价值确认
+            <select name="valueConfirmed">
+              <option value="false">否</option>
+              <option value="true">是</option>
+            </select>
+          </label>
+          <label>回流结果触发再评估
+            <select name="ingestedResult">
+              <option value="false">否</option>
+              <option value="true">是</option>
+            </select>
+          </label>
+          <button type="submit">运行流程</button>
+        </form>
+      </section>
+
+      <section class="card">
+        <h2>流程看板</h2>
+        <div class="chips" id="state-chips"></div>
+        <pre id="result-json">等待执行...</pre>
+      </section>
+
+      <section class="card">
+        <h2>页面映射（可落地路由）</h2>
+        <ul>
+          <li>/entry：统一入口</li>
+          <li>/triage：首轮识别</li>
+          <li>/assessment：结构化采集</li>
+          <li>/result：判断结果</li>
+          <li>/plan：目标与任务</li>
+          <li>/service：服务承接/观察等待</li>
+          <li>/followup：随访</li>
+          <li>/dashboard：用户看板</li>
+          <li>/payment：首单触发</li>
+          <li>/handoff：医生接管</li>
+        </ul>
+      </section>
+    </main>
+
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>
